@@ -2,6 +2,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from "@/components/ui/use-toast";
 
+// Add WebXR type extension for TypeScript
+declare global {
+  interface Navigator {
+    xr?: any;
+  }
+}
+
 interface ARViewerProps {
   markerUrl?: string;
   flagUrl: string;
