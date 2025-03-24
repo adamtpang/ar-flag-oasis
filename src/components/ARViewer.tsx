@@ -31,23 +31,9 @@ const ARViewer: React.FC<ARViewerProps> = ({
         console.log('WebXR Check:', typeof navigator.xr !== 'undefined');
         console.log('Mobile Check:', /Mobi|Android/i.test(navigator.userAgent));
         
-        // Set AR as supported by default for mobile devices
-        // AR.js works on most modern mobile browsers even without WebXR
-        if (/Mobi|Android/i.test(navigator.userAgent)) {
-          console.log('Mobile device detected, proceeding with AR');
-          setIsARSupported(true);
-        } 
-        // If not mobile and no WebXR, then mark as unsupported
-        else if (!navigator.xr) {
-          console.log('Non-mobile device without WebXR detected');
-          setIsARSupported(false);
-          toast({
-            title: "AR Not Supported",
-            description: "Your browser doesn't support WebXR or AR capabilities.",
-            variant: "destructive",
-          });
-          return;
-        }
+        // Always set AR as supported for mobile devices with camera access
+        // Most issues come from permissions rather than capability
+        setIsARSupported(true);
 
         // Load AR.js and A-Frame scripts
         await Promise.all([
@@ -78,7 +64,7 @@ const ARViewer: React.FC<ARViewerProps> = ({
         setIsARSupported(false);
         toast({
           title: "AR Initialization Failed",
-          description: "There was a problem setting up the AR viewer.",
+          description: "There was a problem setting up the AR viewer. Please ensure you've granted camera permissions.",
           variant: "destructive",
         });
       }

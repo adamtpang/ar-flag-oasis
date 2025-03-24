@@ -7,7 +7,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Loader2 } from 'lucide-react';
 
 const Index = () => {
-  const [showInstructions, setShowInstructions] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true); // Always show instructions first
   const [arInitialized, setArInitialized] = useState(false);
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
 
@@ -45,6 +45,11 @@ const Index = () => {
       stream.getTracks().forEach(track => track.stop());
       setCameraPermission(true);
       setArInitialized(true);
+      
+      toast({
+        title: "Camera Access Granted",
+        description: "Now point your camera at a Hiro marker to see the flag.",
+      });
     } catch (error) {
       console.error('Camera permission denied:', error);
       setCameraPermission(false);
@@ -73,8 +78,19 @@ const Index = () => {
           <div className="glass-panel p-8 max-w-md text-center animate-fade-in">
             <h2 className="text-2xl font-semibold mb-4">Experience Our Flag in AR</h2>
             <p className="text-muted-foreground mb-6">
-              Point your camera at the Hiro marker to see our flag come to life in augmented reality.
+              This app uses a "Hiro marker" - a special black and white pattern that helps position the 3D content.
+              You can see what it looks like by clicking the Download button in the header.
             </p>
+            <div className="mb-6">
+              <img 
+                src="./assets/marker.png" 
+                alt="Hiro Marker" 
+                className="mx-auto border-2 border-primary p-2 max-w-[200px]" 
+              />
+              <p className="text-sm text-muted-foreground mt-2">
+                Point your camera at this pattern after starting the AR experience
+              </p>
+            </div>
             <button
               onClick={requestCameraPermission}
               className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"

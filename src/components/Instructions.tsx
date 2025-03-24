@@ -26,10 +26,15 @@ const Instructions: React.FC<InstructionsProps> = ({ isOpen, onClose }) => {
               <span className="text-white text-sm font-medium">1</span>
             </div>
             <div>
-              <h3 className="font-medium">Download the Marker</h3>
+              <h3 className="font-medium">What is a Hiro Marker?</h3>
               <p className="text-muted-foreground text-sm">
-                Click the download button in the top bar to save the marker image.
+                A Hiro marker is a standard AR pattern that looks like this:
               </p>
+              <img 
+                src="./assets/marker.png" 
+                alt="Hiro Marker" 
+                className="mt-2 border border-muted p-2 max-w-[150px]" 
+              />
             </div>
           </div>
           
@@ -38,9 +43,9 @@ const Instructions: React.FC<InstructionsProps> = ({ isOpen, onClose }) => {
               <span className="text-white text-sm font-medium">2</span>
             </div>
             <div>
-              <h3 className="font-medium">Print or Display the Marker</h3>
+              <h3 className="font-medium">Download or Display the Marker</h3>
               <p className="text-muted-foreground text-sm">
-                Print the marker image or display it on another device's screen.
+                Click the download button in the top bar to save the marker image. Print it or display it on another screen.
               </p>
             </div>
           </div>
@@ -52,7 +57,7 @@ const Instructions: React.FC<InstructionsProps> = ({ isOpen, onClose }) => {
             <div>
               <h3 className="font-medium">Point Your Camera</h3>
               <p className="text-muted-foreground text-sm">
-                Allow camera access when prompted and point your device at the marker.
+                Allow camera access when prompted. Point your device at the Hiro marker from about 1-2 feet away.
               </p>
             </div>
           </div>
@@ -64,7 +69,7 @@ const Instructions: React.FC<InstructionsProps> = ({ isOpen, onClose }) => {
             <div>
               <h3 className="font-medium">View the Flag in AR</h3>
               <p className="text-muted-foreground text-sm">
-                The flag will appear in augmented reality above the marker.
+                The app will recognize the Hiro marker and display the flag above it in augmented reality.
               </p>
             </div>
           </div>
