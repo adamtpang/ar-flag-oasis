@@ -26,8 +26,20 @@ const ARViewer: React.FC<ARViewerProps> = ({
   useEffect(() => {
     const checkARSupport = async () => {
       try {
-        // Check if the browser supports WebXR
-        if (!navigator.xr) {
+        // Log device information for debugging
+        console.log('User Agent:', navigator.userAgent);
+        console.log('WebXR Check:', typeof navigator.xr !== 'undefined');
+        console.log('Mobile Check:', /Mobi|Android/i.test(navigator.userAgent));
+        
+        // Set AR as supported by default for mobile devices
+        // AR.js works on most modern mobile browsers even without WebXR
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+          console.log('Mobile device detected, proceeding with AR');
+          setIsARSupported(true);
+        } 
+        // If not mobile and no WebXR, then mark as unsupported
+        else if (!navigator.xr) {
+          console.log('Non-mobile device without WebXR detected');
           setIsARSupported(false);
           toast({
             title: "AR Not Supported",
@@ -42,6 +54,8 @@ const ARViewer: React.FC<ARViewerProps> = ({
           loadScript('https://aframe.io/releases/1.4.0/aframe.min.js'),
           loadScript('https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js')
         ]);
+
+        console.log('Scripts loaded successfully');
 
         // Add event listeners for marker found/lost
         document.addEventListener('markerFound', () => {
